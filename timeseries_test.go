@@ -39,6 +39,17 @@ func TestGetTimeSeries168h(t *testing.T) {
 	}
 }
 
+func TestGetTimeSeries0(t *testing.T) {
+	begTime, _ := time.Parse(time.RFC3339, "2014-01-01T22:14:03Z")
+	endTime, _ := time.Parse(time.RFC3339, "2014-01-07T22:15:03Z")
+	intervalDuration, _ := time.ParseDuration("0h")
+
+	timeSeries := GetTimeSeries(begTime, endTime, intervalDuration)
+	if len(timeSeries) != 1 {
+		t.Error("The size of resulting serie should be 1")
+	}
+}
+
 func TestGetBegTimeSeries(t *testing.T) {
 	endTime, _ := time.Parse(time.RFC3339, "2014-01-01T22:15:03Z")
 	intervalDuration, _ := time.ParseDuration("1h")

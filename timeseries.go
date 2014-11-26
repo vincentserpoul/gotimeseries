@@ -19,6 +19,11 @@ func GetTimeSeries(begTime time.Time, endTime time.Time, intervalDuration time.D
 		return timeSeries
 	}
 
+	if intervalDuration == 0 {
+		timeSeries = append(timeSeries, begTime)
+		return timeSeries
+	}
+
 	for oneTime := begTime.Truncate(intervalDuration); oneTime.Before(endTime); oneTime = oneTime.Add(intervalDuration) {
 		timeSeries = append(timeSeries, oneTime)
 	}
